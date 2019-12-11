@@ -24,7 +24,7 @@ CREATE TABLE persons2content (
 insert into films values (1,'Avengers: Endgame','USA, UK, Canada',47450130,'2019-04-29'),
 (2,'Fast & Furious Presents: Hobbs & Shaw','USA',18775269,'2019-08-01'),
 (3,'The Lion King','USA',4933957,'2019-07-18'),
-(4,'Gisaengchung South Korea',1328181,'2019-07-04'),
+(4,'Gisaengchung', 'South Korea',1328181,'2019-07-04'),
 (5,'Spider-Man: Far from Home','USA',21444241,'2019-07-04');
 
 insert into persons values (101, 'Anthony Russo'),
