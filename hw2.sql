@@ -16,9 +16,10 @@ INNER JOIN ratings ON ratings.movieid=links.movieid
 WHERE ratings.rating=5;
 --3Аггрегация данных: базовые статистики 
 --1
- SELECT COUNT(movieid)
-FROM ratings
-WHERE rating IS NULL;
+SELECT COUNT(DISTINCT links.movieid) 
+FROM links LEFT JOIN ratings ON ratings.movieid=links.movieid
+WHERE ratings.rating is NULL;
+
 --2
 SELECT userid
 FROM ratings
