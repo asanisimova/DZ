@@ -23,7 +23,9 @@ WHERE ratings.rating is NULL;
 --2
 SELECT userid
 FROM ratings
-GROUP BY userid HAVING AVG(rating)>3.5;
+GROUP BY userid HAVING avg(rating) > 3.5
+ORDER BY avg(rating) DESC LIMIT 10;
+
 --4Иерархические запросы
 --1
 SELECT  links.imdbId
@@ -33,10 +35,8 @@ WHERE (SELECT AVG(ratings.rating)>3.5
 	   FROM ratings)
 LIMIT 10;
 --2
-WITH tmp_table
-AS ( SELECT COUNT(rating) AS rating_1
-    FROM ratings
-    )
-SELECT AVG(rating_1)
-FROM tmp_table
-GROUP BY rating_1 HAVING rating_1>10;
+SELECT avg(avg_per_user)
+ FROM (SELECT avg(rating) AS avg_per_user
+  FROM ratings
+  GROUP BY userid HAVING COUNT(userid) > 10)
+ AS avg_all_users;
