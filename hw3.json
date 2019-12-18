@@ -17,7 +17,6 @@ print('Adventure" tags count: 3496', 'расчёт количества тего
         и напечатать top-3 самых популярных
 */
 
-printjson(
         db.tags.aggregate([
                 {"$group": {
                                 _id: "$tag_id",
@@ -26,7 +25,6 @@ printjson(
                 },
                 {$sort: {total_sum: -1}},
                 {$limit: 3}
-        ])['_batch']
-);
+        ])
 
 db.tags.aggregate([{$group: {_id: "$tag_id", total_sum: { $sum: 1 }}},{$sort: {total_sum: -1}},{$limit: 3}])
