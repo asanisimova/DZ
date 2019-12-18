@@ -1,0 +1,32 @@
+/*
+        Написать запрос, который выводит общее число тегов
+*/
+db.tags.find().count()
+print('tags count: 91106', 'расчёт количества тегов');
+
+
+/*
+        Добавляем фильтрацию: считаем только количество фильмов с тегом Adventure
+*/
+db.tags.find({tag_name: "Adventure"}).count()
+print('Adventure" tags count: 3496', 'расчёт количества тегов "Adventure"');
+
+
+/*
+         используем группировку данных посчитать количество вхождений для каждого тега
+        и напечатать top-3 самых популярных
+*/
+
+printjson(
+        db.tags.aggregate([
+                {"$group": {
+                                _id: "$tag_id",
+                                total_sum: { $sum: 1 }
+                           }
+                },
+                {$sort: {total_sum: -1}},
+                {$limit: 3}
+        ])['_batch']
+);
+
+db.tags.aggregate([{$group: {_id: "$tag_id", total_sum: { $sum: 1 }}},{$sort: {total_sum: -1}},{$limit: 3}])
